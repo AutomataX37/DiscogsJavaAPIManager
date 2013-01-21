@@ -1,6 +1,5 @@
 package discogsjava.api;
 
-import discogsjava.api.DiscogsApiManager;
 
 /**
  * Created with IntelliJ IDEA.
