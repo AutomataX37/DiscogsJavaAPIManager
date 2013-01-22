@@ -14,6 +14,7 @@ public class Test
     {
         DiscogsApiManager d = new DiscogsApiManager();
         System.out.println(d.getArtist("45").toString());
+        System.out.println(d.getRelease("45").toString());
 
     }
 }

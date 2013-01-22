@@ -2,6 +2,8 @@ package discogsjava.api;
 
 import discogsjava.database.artist.Artist;
 import discogsjava.database.artist.ArtistBuilder;
+import discogsjava.database.release.Release;
+import discogsjava.database.release.ReleaseBuilder;
 import discogsjava.internal.utils.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +48,26 @@ public class DiscogsApiManager
         }
 
         return artist;
+    }
+
+    public Release getRelease(String releaseId)
+    {
+        Release release = new Release();
+
+        try
+        {
+            release = ReleaseBuilder.buildRelease(new JSONObject(makeQuery(StringUtils.format(RELEASAEURL, releaseId))));
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return release;
     }
 
 
