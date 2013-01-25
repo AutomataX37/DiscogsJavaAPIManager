@@ -77,24 +77,6 @@ public class ArtistBuilder
         return images;
     }
 
-    private List<ArtistRelease> buildArtistReleaseList(JSONArray x)
-    {
-        List<ArtistRelease> artistReleases = new ArrayList<ArtistRelease>();
-        for (int i = 0; i < x.length(); i++)
-        {
-            try
-            {
-                artistReleases.add(buildArtistRelease(x.getJSONObject(i)));
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-        }
-        return artistReleases;
-    }
-
-
     private static ArtistAliase buildArtistAliase(JSONObject x)
     {
         ArtistAliase aliase = new ArtistAliase();
@@ -112,7 +94,6 @@ public class ArtistBuilder
         }
         return aliase;
     }
-
 
     private static ArtistImage buildArtistImage(JSONObject x)
     {
@@ -135,6 +116,22 @@ public class ArtistBuilder
         return image;
     }
 
+    private List<ArtistRelease> buildArtistReleaseList(JSONArray x)
+    {
+        List<ArtistRelease> artistReleases = new ArrayList<ArtistRelease>();
+        for (int i = 0; i < x.length(); i++)
+        {
+            try
+            {
+                artistReleases.add(buildArtistRelease(x.getJSONObject(i)));
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+        return artistReleases;
+    }
 
     private ArtistUrls buildArtistUrls(JSONObject x)
     {
@@ -155,7 +152,6 @@ public class ArtistBuilder
         return urls;
     }
 
-
     private ArtistPagination buildArtistPagination(JSONObject x)
     {
         ArtistPagination pagination = new ArtistPagination();
@@ -175,7 +171,6 @@ public class ArtistBuilder
         }
         return pagination;
     }
-
 
     private ArtistRelease buildArtistRelease(JSONObject x)
     {
@@ -203,7 +198,6 @@ public class ArtistBuilder
         }
         return release;
     }
-
 
     private ArtistReleases buildArtistReleases(JSONObject x)
     {

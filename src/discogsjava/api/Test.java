@@ -1,6 +1,8 @@
 package discogsjava.api;
 
 
+import discogsjava.database.master.Master;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Scott
@@ -13,8 +15,9 @@ public class Test
     public static void main(String[] args)
     {
         DiscogsApiManager d = new DiscogsApiManager();
-        System.out.println(d.getArtist("45").toString());
-        System.out.println(d.getRelease("45").toString());
-
+        // System.out.println(d.getArtist("45").toString());
+        //  System.out.println(d.getRelease("45").toString());
+        Master m = d.getMaster("8471");
+        System.out.println(m.getId());
     }
 }

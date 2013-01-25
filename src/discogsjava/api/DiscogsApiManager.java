@@ -2,6 +2,8 @@ package discogsjava.api;
 
 import discogsjava.database.artist.Artist;
 import discogsjava.database.artist.ArtistBuilder;
+import discogsjava.database.master.Master;
+import discogsjava.database.master.MasterBuilder;
 import discogsjava.database.release.Release;
 import discogsjava.database.release.ReleaseBuilder;
 import discogsjava.internal.utils.StringUtils;
@@ -28,7 +30,8 @@ public class DiscogsApiManager
     final String ARTISTURL = DISCOGSURL + "/artists/{0}";
     final String ARTISTRELEASESURL = ARTISTURL + "/releases";
     final String RELEASAEURL = DISCOGSURL + "/releases/{0}";
-
+    final String MASTERSURL = DISCOGSURL + "/masters/{0}";
+    final String MASTERSVERSIONSURL = MASTERSURL + "/versions";
 
     public Artist getArtist(String artistId)
     {
@@ -50,6 +53,26 @@ public class DiscogsApiManager
         return artist;
     }
 
+    public Master getMaster(String masterID)
+    {
+        Master master = new Master();
+
+        try
+        {
+            master = MasterBuilder.buildMaster(new JSONObject(makeQuery(StringUtils.format(MASTERSURL, masterID))));
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return master;
+    }
+
     public Release getRelease(String releaseId)
     {
         Release release = new Release();
@@ -69,7 +92,6 @@ public class DiscogsApiManager
 
         return release;
     }
-
 
     private String makeQuery(String location)
     {
