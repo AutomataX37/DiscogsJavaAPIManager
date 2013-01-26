@@ -2,6 +2,8 @@ package discogsjava.api;
 
 import discogsjava.database.artist.Artist;
 import discogsjava.database.artist.ArtistBuilder;
+import discogsjava.database.label.Label;
+import discogsjava.database.label.LabelBuilder;
 import discogsjava.database.master.Master;
 import discogsjava.database.master.MasterBuilder;
 import discogsjava.database.release.Release;
@@ -14,8 +16,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,11 +29,17 @@ import java.net.URLConnection;
 public class DiscogsApiManager
 {
     final String DISCOGSURL = "http://api.discogs.com";
+
     final String ARTISTURL = DISCOGSURL + "/artists/{0}";
     final String ARTISTRELEASESURL = ARTISTURL + "/releases";
+
     final String RELEASAEURL = DISCOGSURL + "/releases/{0}";
+
     final String MASTERSURL = DISCOGSURL + "/masters/{0}";
     final String MASTERSVERSIONSURL = MASTERSURL + "/versions";
+
+    final String LABELSURL = DISCOGSURL + "/labels/{0})";
+    final String LABELSRELEASESURL = LABELSURL + "releases";
 
     public Artist getArtist(String artistId)
     {
@@ -73,6 +81,26 @@ public class DiscogsApiManager
         return master;
     }
 
+    public Label getLabel(String labelID)
+    {
+        Label label = new Label();
+
+        try
+        {
+            label = LabelBuilder.buildLabel(new JSONObject(makeQuery(StringUtils.format(MASTERSURL, labelID))));
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return label;
+    }
+
     public Release getRelease(String releaseId)
     {
         Release release = new Release();
@@ -102,7 +130,11 @@ public class DiscogsApiManager
         {
             URL url = new URL(location);
             String inputLine;
-            URLConnection connection = url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.connect();
+
+
             InputStream in = connection.getInputStream();
             BufferedReader res = new BufferedReader(new InputStreamReader(in, "UTF-8"));
 
