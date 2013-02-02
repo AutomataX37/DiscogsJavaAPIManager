@@ -8,6 +8,7 @@ import discogsjava.database.master.Master;
 import discogsjava.database.master.MasterBuilder;
 import discogsjava.database.release.Release;
 import discogsjava.database.release.ReleaseBuilder;
+import discogsjava.exception.*;
 import discogsjava.internal.utils.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,7 +122,7 @@ public class DiscogsApiManager
         return release;
     }
 
-    private String makeQuery(String location)
+    private String makeQuery(String location) throws StatusCodeException
     {
 
         String json = null;
@@ -133,7 +134,55 @@ public class DiscogsApiManager
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
+            System.out.println(connection.getResponseMessage());
+            switch (connection.getResponseCode())
+            {
+                case (200):
+                {
+                    break;
+                }
 
+                case (201):
+                {
+                    break;
+                }
+
+                case (204):
+                {
+                    break;
+                }
+
+                case (401):
+                {
+                    throw new StatusCodeUnauthorizedException();
+                }
+
+                case (403):
+                {
+                    throw new StatusCodeForbiddenException();
+                }
+
+                case (404):
+                {
+                    throw new StatusCodeNotFoundException();
+                }
+
+                case (405):
+                {
+                    throw new StatusCodeMethodNotAllowedException();
+                }
+
+                case (422):
+                {
+                    throw new StatusCodeUnprocessableEntityException();
+                }
+
+                case (500):
+                {
+                    throw new StatusCodeInternalServerErrorException();
+                }
+
+            }
 
             InputStream in = connection.getInputStream();
             BufferedReader res = new BufferedReader(new InputStreamReader(in, "UTF-8"));
