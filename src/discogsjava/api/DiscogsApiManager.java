@@ -54,10 +54,11 @@ public class DiscogsApiManager
         {
             e.printStackTrace();
         }
-        catch (Exception e)
+        catch (StatusCodeException e)
         {
-            e.printStackTrace();
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+
 
         return artist;
     }
@@ -74,9 +75,9 @@ public class DiscogsApiManager
         {
             e.printStackTrace();
         }
-        catch (Exception e)
+        catch (StatusCodeException e)
         {
-            e.printStackTrace();
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
         return master;
@@ -94,9 +95,9 @@ public class DiscogsApiManager
         {
             e.printStackTrace();
         }
-        catch (Exception e)
+        catch (StatusCodeException e)
         {
-            e.printStackTrace();
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
         return label;
@@ -114,9 +115,9 @@ public class DiscogsApiManager
         {
             e.printStackTrace();
         }
-        catch (Exception e)
+        catch (StatusCodeException e)
         {
-            e.printStackTrace();
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
         return release;
