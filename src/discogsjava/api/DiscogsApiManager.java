@@ -132,6 +132,7 @@ public class DiscogsApiManager
             URL url = new URL(location);
             String inputLine;
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("User-Agent", "DiscogsJavaAPIManager/0.1 +https://github.com/AutomataX37/DiscogsJavaAPIManager");
             connection.setRequestMethod("GET");
             connection.connect();
             System.out.println(connection.getResponseMessage());
