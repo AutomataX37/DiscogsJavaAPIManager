@@ -1,5 +1,6 @@
 package discogsjava.database.search;
 
+
 /**
  * Created with IntelliJ IDEA.
  * User: AutomataX37
@@ -34,7 +35,65 @@ public class DiscogsSearchCriteria
      */
     public String getFormattedSearchCritera(String rootURL)
     {
-        return rootURL;
+        String variableString = "";
+        if (query != null)
+        {
+            variableString = addQuery(variableString, "q=\"" + query + "\"");
+        }
+
+        if (type != null)
+        {
+            variableString = addQuery(variableString, "type=\"" + type.toString().toLowerCase() + "\"");
+        }
+
+        if (artist != null)
+        {
+            variableString = addQuery(variableString, "artist=\"" + artist + "\"");
+        }
+
+        if (releaseTitle != null)
+        {
+            variableString = addQuery(variableString, "release_title=\"" + releaseTitle + "\"");
+        }
+
+        if (label != null)
+        {
+            variableString = addQuery(variableString, "label=\"" + label + "\"");
+        }
+
+        if (title != null)
+        {
+            variableString = addQuery(variableString, "title=\"" + title + "\"");
+        }
+
+        if (catalogNumber != null)
+        {
+            variableString = addQuery(variableString, "catno=\"" + catalogNumber + "\"");
+        }
+
+        if (barcode != null)
+        {
+            variableString = addQuery(variableString, "barcode=\"" + barcode + "\"");
+        }
+
+        if (year != null)
+        {
+            variableString = addQuery(variableString, "year=\"" + year + "\"");
+        }
+
+
+        return rootURL + "?" + variableString;
+    }
+
+    private String addQuery(String varString, String query)
+    {
+        if (varString.isEmpty())
+        {
+            return varString += query;
+        } else
+        {
+            return varString += "&" + query;
+        }
     }
 
     public String getQuery()

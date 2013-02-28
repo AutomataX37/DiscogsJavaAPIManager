@@ -1,7 +1,7 @@
 package discogsjava.api;
 
 
-import discogsjava.database.master.Master;
+import discogsjava.database.search.DiscogsSearchCriteria;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,10 +14,10 @@ public class Test
 {
     public static void main(String[] args)
     {
-        DiscogsApiManager d = new DiscogsApiManager();
-        // System.out.println(d.getArtist("45").toString());
-        //  System.out.println(d.getRelease("45").toString());
-        Master m = d.getMaster("8471");
-        System.out.println(m.getId());
+        DiscogsSearchCriteria dsc = new DiscogsSearchCriteria();
+        dsc.setType(DiscogsSearchCriteria.SearchType.RELEASE);
+        dsc.setTitle("Ken Ishii");
+
+        System.out.println(dsc.getFormattedSearchCritera("http://api.discogs.com/database/search"));
     }
 }

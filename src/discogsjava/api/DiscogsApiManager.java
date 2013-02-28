@@ -42,6 +42,8 @@ public class DiscogsApiManager
     final String LABELSURL = DISCOGSURL + "/labels/{0})";
     final String LABELSRELEASESURL = LABELSURL + "releases";
 
+    final String SEARCHURL = DISCOGSURL + "/search?";
+
     public Artist getArtist(String artistId)
     {
         Artist artist = new Artist();
@@ -121,6 +123,10 @@ public class DiscogsApiManager
         }
 
         return release;
+    }
+
+    public void search(String query)
+    {
     }
 
     private String makeQuery(String location) throws StatusCodeException
